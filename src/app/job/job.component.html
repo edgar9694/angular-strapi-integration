@@ -1,0 +1,23 @@
+<div *ngIf="!job">
+    Job not found
+  </div>
+  
+  <!-- Job Details -->
+  <div *ngIf="job">
+    <h2>{{job.title}}</h2>
+    
+    <!-- Company info -->
+    <div class="d-flex align-items-center">
+      <img [src]="api_base_url + job.company.logo.url" [alt]="job.company.name + ' logo'" height="50">
+      <div class="ml-3"> {{job.company.name}} </div>
+      <a *ngIf="job.company.website_url" class="ml-3" [href]="job.company.website_url" target="_blank"> {{job.company.website_url}} </a>
+    </div>
+  
+    <!-- Description (markdown) -->
+    <div class="mt-4">
+      <markdown [data]="job.description"></markdown>
+    </div>
+    <div class="mt-2 bg-light rounded px-3 py-2">
+      To apply: <a [href]="'mailto:' + job.company.contact_email"> {{job.company.contact_email}} </a>
+    </div>
+  </div>
